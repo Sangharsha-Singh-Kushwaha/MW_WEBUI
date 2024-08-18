@@ -1,14 +1,17 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { loadRemoteModule } from '@angular-architects/module-federation';
-import { MainNavigationComponent } from './Components/main-navigation/main-navigation.component';
+import { environment } from '../environments/environment';
+
+const customerRemoteEntry:any = environment["customersMfe"];
+const productRemoteEntry:any = environment["productsMfe"];
 
 const routes: Routes = [
   {
     path: 'customers',
     loadChildren: () => loadRemoteModule({
       type: 'module',
-      remoteEntry: 'http://localhost:4300/remoteEntry.js',
+      remoteEntry: customerRemoteEntry,
       exposedModule: './Module'
     })
       .then(m => m.CustomerListModule)
@@ -17,7 +20,7 @@ const routes: Routes = [
     path: 'products',
     loadChildren: () => loadRemoteModule({
       type: 'module',
-      remoteEntry: 'http://localhost:4400/remoteEntry.js',
+      remoteEntry: productRemoteEntry,
       exposedModule: './Module'
     })
       .then(m => m.ProductListModule)

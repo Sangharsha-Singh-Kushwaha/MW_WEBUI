@@ -7,4 +7,9 @@ import { Component } from '@angular/core';
 })
 export class CustomerListComponent {
 
+
+  list:any;
+  ngOnInit(){
+  }
+
 }
