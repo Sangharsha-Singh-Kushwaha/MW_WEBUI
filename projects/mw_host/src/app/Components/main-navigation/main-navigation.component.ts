@@ -10,6 +10,10 @@ export class MainNavigationComponent {
 
   constructor(private router:Router){}
 
+  ngOnInit(){
+    this.navigationPath("customer");
+  }
+
   navigationPath(params:any){
     params == "customer" ? this.router?.navigateByUrl('customers/customer') : this.router?.navigateByUrl('products/product');
   }

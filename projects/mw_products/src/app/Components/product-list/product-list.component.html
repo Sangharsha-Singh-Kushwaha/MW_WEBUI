@@ -1,1 +1,26 @@
-<p>product-list works!</p>
+<div class="container-fluid">
+    <div class="search-container mt-5">
+        <input type="text" placeholder="Search..." [(ngModel)]="searchValue">
+        <i class="fas fa-search search-icon" (click)="searchItems()"></i>
+    </div>
+    <div class="main">
+        <div class="product-detail-card" *ngFor="let product of products">
+            <img [src]="product.image" alt="Product Image" class="product-image">
+            <div class="product-info">
+                <h2 class="product-title">{{product.title}}</h2>
+                <p class="product-category"><strong>Category:</strong> {{product.category}}</p>
+                <p class="product-price"><strong>Price:</strong> {{product.price}}</p>
+                <p class="product-description">
+                    <strong>Description:</strong>
+                    {{product.description}}
+                </p>
+                <div class="icons">
+                    <i class="fas fa-heart"></i>
+                    <i class="fas fa-share"></i>
+                </div>
+                <button class="add-to-cart-btn">Add to Cart</button>
+            </div>
+        </div>
+    </div>
+
+</div>

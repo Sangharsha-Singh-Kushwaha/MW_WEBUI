@@ -1,414 +1,409 @@
 {
-	"$schema": "./node_modules/@angular/cli/lib/config/schema.json",
-	"version": 1,
-	"newProjectRoot": "projects",
-	"projects": {
-		"mw_host": {
-			"projectType": "application",
-			"schematics": {
-				"@schematics/angular:component": {
-					"style": "scss",
-					"skipTests": true
-				},
-				"@schematics/angular:class": {
-					"skipTests": true
-				},
-				"@schematics/angular:directive": {
-					"skipTests": true
-				},
-				"@schematics/angular:guard": {
-					"skipTests": true
-				},
-				"@schematics/angular:interceptor": {
-					"skipTests": true
-				},
-				"@schematics/angular:pipe": {
-					"skipTests": true
-				},
-				"@schematics/angular:resolver": {
-					"skipTests": true
-				},
-				"@schematics/angular:service": {
-					"skipTests": true
-				}
-			},
-			"root": "projects/mw_host",
-			"sourceRoot": "projects/mw_host/src",
-			"prefix": "app",
-			"architect": {
-				"build": {
-					"builder": "ngx-build-plus:browser",
-					"options": {
-						"outputPath": "dist/mw_host",
-						"index": "projects/mw_host/src/index.html",
-						"polyfills": [
-							"zone.js"
-						],
-						"tsConfig": "projects/mw_host/tsconfig.app.json",
-						"inlineStyleLanguage": "scss",
-						"assets": [
-							"projects/mw_host/src/favicon.ico",
-							"projects/mw_host/src/assets"
-						],
-						"styles": [
-							"node_modules/bootstrap/dist/css/bootstrap.min.css",
-							"projects/mw_host/src/styles.scss"
-						],
-						"scripts": [
-							"node_modules/jquery/dist/jquery.min.js",
-    						"node_modules/bootstrap/dist/js/bootstrap.min.js"
-						],
-						"main": "projects/mw_host/src/main.ts",
-						"extraWebpackConfig": "projects/mw_host/webpack.config.js",
-						"commonChunk": false
-					},
-					"configurations": {
-						"production": {
-							"budgets": [
-								{
-									"type": "initial",
-									"maximumWarning": "500kb",
-									"maximumError": "1mb"
-								},
-								{
-									"type": "anyComponentStyle",
-									"maximumWarning": "2kb",
-									"maximumError": "4kb"
-								}
-							],
-							"outputHashing": "all",
-							"extraWebpackConfig": "projects/mw_host/webpack.prod.config.js"
-						},
-						"development": {
-							"optimization": false,
-							"extractLicenses": false,
-              "sourceMap": true,
-              "fileReplacements": [
+  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "version": 1,
+  "newProjectRoot": "projects",
+  "projects": {
+    "mw_host": {
+      "projectType": "application",
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "scss",
+          "skipTests": true
+        },
+        "@schematics/angular:class": {
+          "skipTests": true
+        },
+        "@schematics/angular:directive": {
+          "skipTests": true
+        },
+        "@schematics/angular:guard": {
+          "skipTests": true
+        },
+        "@schematics/angular:interceptor": {
+          "skipTests": true
+        },
+        "@schematics/angular:pipe": {
+          "skipTests": true
+        },
+        "@schematics/angular:resolver": {
+          "skipTests": true
+        },
+        "@schematics/angular:service": {
+          "skipTests": true
+        }
+      },
+      "root": "projects/mw_host",
+      "sourceRoot": "projects/mw_host/src",
+      "prefix": "app",
+      "architect": {
+        "build": {
+          "builder": "ngx-build-plus:browser",
+          "options": {
+            "outputPath": "dist/mw_host",
+            "index": "projects/mw_host/src/index.html",
+            "polyfills": ["zone.js"],
+            "tsConfig": "projects/mw_host/tsconfig.app.json",
+            "inlineStyleLanguage": "scss",
+            "assets": [
+              "projects/mw_host/src/favicon.ico",
+              "projects/mw_host/src/assets"
+            ],
+            "styles": [
+              "node_modules/bootstrap/dist/css/bootstrap.min.css",
+              "node_modules/@fortawesome/fontawesome-free/css/all.min.css",
+              "projects/mw_host/src/styles.scss"
+            ],
+            "scripts": [
+              "node_modules/jquery/dist/jquery.min.js",
+              "node_modules/bootstrap/dist/js/bootstrap.min.js"
+            ],
+            "main": "projects/mw_host/src/main.ts",
+            "extraWebpackConfig": "projects/mw_host/webpack.config.js",
+            "commonChunk": false
+          },
+          "configurations": {
+            "production": {
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "500kb",
+                  "maximumError": "1mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "2kb",
+                  "maximumError": "4kb"
+                }
+              ],
+			  "fileReplacements": [
                 {
                   "replace": "projects/mw_host/src/environments/environment.ts",
                   "with": "projects/mw_host/src/environments/environment.prod.ts"
                 }
+              ],
+              "outputHashing": "all",
+              "extraWebpackConfig": "projects/mw_host/webpack.prod.config.js"
+            },
+            "development": {
+              "optimization": false,
+              "extractLicenses": false,
+              "sourceMap": true,
+              "fileReplacements": [
+                {
+                  "replace": "projects/mw_host/src/environments/environment.prod.ts",
+                  "with": "projects/mw_host/src/environments/environment.ts"
+                }
               ]
-						}
-					},
-					"defaultConfiguration": "production"
-				},
-				"serve": {
-					"builder": "ngx-build-plus:dev-server",
-					"configurations": {
-						"production": {
-							"buildTarget": "mw_host:build:production",
-							"extraWebpackConfig": "projects/mw_host/webpack.prod.config.js"
-						},
-						"development": {
-							"buildTarget": "mw_host:build:development"
-						}
-					},
-					"defaultConfiguration": "development",
-					"options": {
-						"port": 4200,
-						"publicHost": "http://localhost:4200",
-						"extraWebpackConfig": "projects/mw_host/webpack.config.js"
-					}
-				},
-				"extract-i18n": {
-					"builder": "ngx-build-plus:extract-i18n",
-					"options": {
-						"buildTarget": "mw_host:build",
-						"extraWebpackConfig": "projects/mw_host/webpack.config.js"
-					}
-				},
-				"test": {
-					"builder": "@angular-devkit/build-angular:karma",
-					"options": {
-						"polyfills": [
-							"zone.js",
-							"zone.js/testing"
-						],
-						"tsConfig": "projects/mw_host/tsconfig.spec.json",
-						"inlineStyleLanguage": "scss",
-						"assets": [
-							"projects/mw_host/src/favicon.ico",
-							"projects/mw_host/src/assets"
-						],
-						"styles": [
-							"node_modules/bootstrap/dist/css/bootstrap.min.css",
-							"projects/mw_host/src/styles.scss"
-						],
-						"scripts": [
-							"node_modules/jquery/dist/jquery.min.js",
-    						"node_modules/bootstrap/dist/js/bootstrap.min.js"
-						]
-					}
-				}
-			}
-		},
-		"mw_customers": {
-			"projectType": "application",
-			"schematics": {
-				"@schematics/angular:component": {
-					"style": "scss",
-					"skipTests": true
-				},
-				"@schematics/angular:class": {
-					"skipTests": true
-				},
-				"@schematics/angular:directive": {
-					"skipTests": true
-				},
-				"@schematics/angular:guard": {
-					"skipTests": true
-				},
-				"@schematics/angular:interceptor": {
-					"skipTests": true
-				},
-				"@schematics/angular:pipe": {
-					"skipTests": true
-				},
-				"@schematics/angular:resolver": {
-					"skipTests": true
-				},
-				"@schematics/angular:service": {
-					"skipTests": true
-				}
-			},
-			"root": "projects/mw_customers",
-			"sourceRoot": "projects/mw_customers/src",
-			"prefix": "app",
-			"architect": {
-				"build": {
-					"builder": "ngx-build-plus:browser",
-					"options": {
-						"outputPath": "dist/mw_customers",
-						"index": "projects/mw_customers/src/index.html",
-						"polyfills": [
-							"zone.js"
-						],
-						"tsConfig": "projects/mw_customers/tsconfig.app.json",
-						"inlineStyleLanguage": "scss",
-						"assets": [
-							"projects/mw_customers/src/favicon.ico",
-							"projects/mw_customers/src/assets"
-						],
-						"styles": [
-							"node_modules/bootstrap/dist/css/bootstrap.min.css",
-							"projects/mw_customers/src/styles.scss"
-						],
-						"scripts": [
-							"node_modules/jquery/dist/jquery.min.js",
-    						"node_modules/bootstrap/dist/js/bootstrap.min.js"
-						],
-						"main": "projects/mw_customers/src/main.ts",
-						"extraWebpackConfig": "projects/mw_customers/webpack.config.js",
-						"commonChunk": false
-					},
-					"configurations": {
-						"production": {
-							"budgets": [
-								{
-									"type": "initial",
-									"maximumWarning": "500kb",
-									"maximumError": "1mb"
-								},
-								{
-									"type": "anyComponentStyle",
-									"maximumWarning": "2kb",
-									"maximumError": "4kb"
-								}
-							],
-							"outputHashing": "all",
-							"extraWebpackConfig": "projects/mw_customers/webpack.prod.config.js"
-						},
-						"development": {
-							"optimization": false,
-							"extractLicenses": false,
-							"sourceMap": true
-						}
-					},
-					"defaultConfiguration": "production"
-				},
-				"serve": {
-					"builder": "ngx-build-plus:dev-server",
-					"configurations": {
-						"production": {
-							"buildTarget": "mw_customers:build:production",
-							"extraWebpackConfig": "projects/mw_customers/webpack.prod.config.js"
-						},
-						"development": {
-							"buildTarget": "mw_customers:build:development"
-						}
-					},
-					"defaultConfiguration": "development",
-					"options": {
-						"port": 4300,
-						"publicHost": "http://localhost:4300",
-						"extraWebpackConfig": "projects/mw_customers/webpack.config.js"
-					}
-				},
-				"extract-i18n": {
-					"builder": "ngx-build-plus:extract-i18n",
-					"options": {
-						"buildTarget": "mw_customers:build",
-						"extraWebpackConfig": "projects/mw_customers/webpack.config.js"
-					}
-				},
-				"test": {
-					"builder": "@angular-devkit/build-angular:karma",
-					"options": {
-						"polyfills": [
-							"zone.js",
-							"zone.js/testing"
-						],
-						"tsConfig": "projects/mw_customers/tsconfig.spec.json",
-						"inlineStyleLanguage": "scss",
-						"assets": [
-							"projects/mw_customers/src/favicon.ico",
-							"projects/mw_customers/src/assets"
-						],
-						"styles": [
-							"node_modules/bootstrap/dist/css/bootstrap.min.css",
-							"projects/mw_customers/src/styles.scss"
-						],
-						"scripts": [
-							"node_modules/jquery/dist/jquery.min.js",
-    						"node_modules/bootstrap/dist/js/bootstrap.min.js"
-						]
-					}
-				}
-			}
-		},
-		"mw_products": {
-			"projectType": "application",
-			"schematics": {
-				"@schematics/angular:component": {
-					"style": "scss",
-					"skipTests": true
-				},
-				"@schematics/angular:class": {
-					"skipTests": true
-				},
-				"@schematics/angular:directive": {
-					"skipTests": true
-				},
-				"@schematics/angular:guard": {
-					"skipTests": true
-				},
-				"@schematics/angular:interceptor": {
-					"skipTests": true
-				},
-				"@schematics/angular:pipe": {
-					"skipTests": true
-				},
-				"@schematics/angular:resolver": {
-					"skipTests": true
-				},
-				"@schematics/angular:service": {
-					"skipTests": true
-				}
-			},
-			"root": "projects/mw_products",
-			"sourceRoot": "projects/mw_products/src",
-			"prefix": "app",
-			"architect": {
-				"build": {
-					"builder": "ngx-build-plus:browser",
-					"options": {
-						"outputPath": "dist/mw_products",
-						"index": "projects/mw_products/src/index.html",
-						"polyfills": [
-							"zone.js"
-						],
-						"tsConfig": "projects/mw_products/tsconfig.app.json",
-						"inlineStyleLanguage": "scss",
-						"assets": [
-							"projects/mw_products/src/favicon.ico",
-							"projects/mw_products/src/assets"
-						],
-						"styles": [
-							"node_modules/bootstrap/dist/css/bootstrap.min.css",
-							"projects/mw_products/src/styles.scss"
-						],
-						"scripts": [
-							"node_modules/jquery/dist/jquery.min.js",
-    						"node_modules/bootstrap/dist/js/bootstrap.min.js"],
-						"main": "projects/mw_products/src/main.ts",
-						"extraWebpackConfig": "projects/mw_products/webpack.config.js",
-						"commonChunk": false
-					},
-					"configurations": {
-						"production": {
-							"budgets": [
-								{
-									"type": "initial",
-									"maximumWarning": "500kb",
-									"maximumError": "1mb"
-								},
-								{
-									"type": "anyComponentStyle",
-									"maximumWarning": "2kb",
-									"maximumError": "4kb"
-								}
-							],
-							"outputHashing": "all",
-							"extraWebpackConfig": "projects/mw_products/webpack.prod.config.js"
-						},
-						"development": {
-							"optimization": false,
-							"extractLicenses": false,
-							"sourceMap": true
-						}
-					},
-					"defaultConfiguration": "production"
-				},
-				"serve": {
-					"builder": "ngx-build-plus:dev-server",
-					"configurations": {
-						"production": {
-							"buildTarget": "mw_products:build:production",
-							"extraWebpackConfig": "projects/mw_products/webpack.prod.config.js"
-						},
-						"development": {
-							"buildTarget": "mw_products:build:development"
-						}
-					},
-					"defaultConfiguration": "development",
-					"options": {
-						"port": 4400,
-						"publicHost": "http://localhost:4400",
-						"extraWebpackConfig": "projects/mw_products/webpack.config.js"
-					}
-				},
-				"extract-i18n": {
-					"builder": "ngx-build-plus:extract-i18n",
-					"options": {
-						"buildTarget": "mw_products:build",
-						"extraWebpackConfig": "projects/mw_products/webpack.config.js"
-					}
-				},
-				"test": {
-					"builder": "@angular-devkit/build-angular:karma",
-					"options": {
-						"polyfills": [
-							"zone.js",
-							"zone.js/testing"
-						],
-						"tsConfig": "projects/mw_products/tsconfig.spec.json",
-						"inlineStyleLanguage": "scss",
-						"assets": [
-							"projects/mw_products/src/favicon.ico",
-							"projects/mw_products/src/assets"
-						],
-						"styles": [
-							"node_modules/bootstrap/dist/css/bootstrap.min.css",
-							"projects/mw_products/src/styles.scss"
-						],
-						"scripts": [
-							"node_modules/jquery/dist/jquery.min.js",
-    						"node_modules/bootstrap/dist/js/bootstrap.min.js"
-						]
-					}
-				}
-			}
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "serve": {
+          "builder": "ngx-build-plus:dev-server",
+          "configurations": {
+            "production": {
+              "buildTarget": "mw_host:build:production",
+              "extraWebpackConfig": "projects/mw_host/webpack.prod.config.js"
+            },
+            "development": {
+              "buildTarget": "mw_host:build:development"
+            }
+          },
+          "defaultConfiguration": "development",
+          "options": {
+            "port": 4200,
+            "publicHost": "http://localhost:4200",
+            "extraWebpackConfig": "projects/mw_host/webpack.config.js"
+          }
+        },
+        "extract-i18n": {
+          "builder": "ngx-build-plus:extract-i18n",
+          "options": {
+            "buildTarget": "mw_host:build",
+            "extraWebpackConfig": "projects/mw_host/webpack.config.js"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "polyfills": ["zone.js", "zone.js/testing"],
+            "tsConfig": "projects/mw_host/tsconfig.spec.json",
+            "inlineStyleLanguage": "scss",
+            "assets": [
+              "projects/mw_host/src/favicon.ico",
+              "projects/mw_host/src/assets"
+            ],
+            "styles": [
+              "node_modules/bootstrap/dist/css/bootstrap.min.css",
+              "projects/mw_host/src/styles.scss"
+            ],
+            "scripts": [
+              "node_modules/jquery/dist/jquery.min.js",
+              "node_modules/bootstrap/dist/js/bootstrap.min.js"
+            ]
+          }
+        }
+      }
+    },
+    "mw_customers": {
+      "projectType": "application",
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "scss",
+          "skipTests": true
+        },
+        "@schematics/angular:class": {
+          "skipTests": true
+        },
+        "@schematics/angular:directive": {
+          "skipTests": true
+        },
+        "@schematics/angular:guard": {
+          "skipTests": true
+        },
+        "@schematics/angular:interceptor": {
+          "skipTests": true
+        },
+        "@schematics/angular:pipe": {
+          "skipTests": true
+        },
+        "@schematics/angular:resolver": {
+          "skipTests": true
+        },
+        "@schematics/angular:service": {
+          "skipTests": true
+        }
+      },
+      "root": "projects/mw_customers",
+      "sourceRoot": "projects/mw_customers/src",
+      "prefix": "app",
+      "architect": {
+        "build": {
+          "builder": "ngx-build-plus:browser",
+          "options": {
+            "outputPath": "dist/mw_customers",
+            "index": "projects/mw_customers/src/index.html",
+            "polyfills": ["zone.js"],
+            "tsConfig": "projects/mw_customers/tsconfig.app.json",
+            "inlineStyleLanguage": "scss",
+            "assets": [
+              "projects/mw_customers/src/favicon.ico",
+              "projects/mw_customers/src/assets"
+            ],
+            "styles": [
+              "node_modules/bootstrap/dist/css/bootstrap.min.css",
+              "node_modules/@fortawesome/fontawesome-free/css/all.min.css",
+              "projects/mw_customers/src/styles.scss"
+            ],
+            "scripts": [
+              "node_modules/jquery/dist/jquery.min.js",
+              "node_modules/bootstrap/dist/js/bootstrap.min.js"
+            ],
+            "main": "projects/mw_customers/src/main.ts",
+            "extraWebpackConfig": "projects/mw_customers/webpack.config.js",
+            "commonChunk": false
+          },
+          "configurations": {
+            "production": {
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "500kb",
+                  "maximumError": "1mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "2kb",
+                  "maximumError": "4kb"
+                }
+              ],
+              "outputHashing": "all",
+              "extraWebpackConfig": "projects/mw_customers/webpack.prod.config.js"
+            },
+            "development": {
+              "optimization": false,
+              "extractLicenses": false,
+              "sourceMap": true
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "serve": {
+          "builder": "ngx-build-plus:dev-server",
+          "configurations": {
+            "production": {
+              "buildTarget": "mw_customers:build:production",
+              "extraWebpackConfig": "projects/mw_customers/webpack.prod.config.js"
+            },
+            "development": {
+              "buildTarget": "mw_customers:build:development"
+            }
+          },
+          "defaultConfiguration": "development",
+          "options": {
+            "port": 4300,
+            "publicHost": "http://localhost:4300",
+            "extraWebpackConfig": "projects/mw_customers/webpack.config.js"
+          }
+        },
+        "extract-i18n": {
+          "builder": "ngx-build-plus:extract-i18n",
+          "options": {
+            "buildTarget": "mw_customers:build",
+            "extraWebpackConfig": "projects/mw_customers/webpack.config.js"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "polyfills": ["zone.js", "zone.js/testing"],
+            "tsConfig": "projects/mw_customers/tsconfig.spec.json",
+            "inlineStyleLanguage": "scss",
+            "assets": [
+              "projects/mw_customers/src/favicon.ico",
+              "projects/mw_customers/src/assets"
+            ],
+            "styles": [
+              "node_modules/bootstrap/dist/css/bootstrap.min.css",
+              "projects/mw_customers/src/styles.scss"
+            ],
+            "scripts": [
+              "node_modules/jquery/dist/jquery.min.js",
+              "node_modules/bootstrap/dist/js/bootstrap.min.js"
+            ]
+          }
+        }
+      }
+    },
+    "mw_products": {
+      "projectType": "application",
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "scss",
+          "skipTests": true
+        },
+        "@schematics/angular:class": {
+          "skipTests": true
+        },
+        "@schematics/angular:directive": {
+          "skipTests": true
+        },
+        "@schematics/angular:guard": {
+          "skipTests": true
+        },
+        "@schematics/angular:interceptor": {
+          "skipTests": true
+        },
+        "@schematics/angular:pipe": {
+          "skipTests": true
+        },
+        "@schematics/angular:resolver": {
+          "skipTests": true
+        },
+        "@schematics/angular:service": {
+          "skipTests": true
+        }
+      },
+      "root": "projects/mw_products",
+      "sourceRoot": "projects/mw_products/src",
+      "prefix": "app",
+      "architect": {
+        "build": {
+          "builder": "ngx-build-plus:browser",
+          "options": {
+            "outputPath": "dist/mw_products",
+            "index": "projects/mw_products/src/index.html",
+            "polyfills": ["zone.js"],
+            "tsConfig": "projects/mw_products/tsconfig.app.json",
+            "inlineStyleLanguage": "scss",
+            "assets": [
+              "projects/mw_products/src/favicon.ico",
+              "projects/mw_products/src/assets"
+            ],
+            "styles": [
+              "node_modules/bootstrap/dist/css/bootstrap.min.css",
+              "node_modules/@fortawesome/fontawesome-free/css/all.min.css",
+              "projects/mw_products/src/styles.scss"
+            ],
+            "scripts": [
+              "node_modules/jquery/dist/jquery.min.js",
+              "node_modules/bootstrap/dist/js/bootstrap.min.js"
+            ],
+            "main": "projects/mw_products/src/main.ts",
+            "extraWebpackConfig": "projects/mw_products/webpack.config.js",
+            "commonChunk": false
+          },
+          "configurations": {
+            "production": {
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "500kb",
+                  "maximumError": "1mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "2kb",
+                  "maximumError": "4kb"
+                }
+              ],
+              "outputHashing": "all",
+              "extraWebpackConfig": "projects/mw_products/webpack.prod.config.js"
+            },
+            "development": {
+              "optimization": false,
+              "extractLicenses": false,
+              "sourceMap": true
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "serve": {
+          "builder": "ngx-build-plus:dev-server",
+          "configurations": {
+            "production": {
+              "buildTarget": "mw_products:build:production",
+              "extraWebpackConfig": "projects/mw_products/webpack.prod.config.js"
+            },
+            "development": {
+              "buildTarget": "mw_products:build:development"
+            }
+          },
+          "defaultConfiguration": "development",
+          "options": {
+            "port": 4400,
+            "publicHost": "http://localhost:4400",
+            "extraWebpackConfig": "projects/mw_products/webpack.config.js"
+          }
+        },
+        "extract-i18n": {
+          "builder": "ngx-build-plus:extract-i18n",
+          "options": {
+            "buildTarget": "mw_products:build",
+            "extraWebpackConfig": "projects/mw_products/webpack.config.js"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "polyfills": ["zone.js", "zone.js/testing"],
+            "tsConfig": "projects/mw_products/tsconfig.spec.json",
+            "inlineStyleLanguage": "scss",
+            "assets": [
+              "projects/mw_products/src/favicon.ico",
+              "projects/mw_products/src/assets"
+            ],
+            "styles": [
+              "node_modules/bootstrap/dist/css/bootstrap.min.css",
+              "projects/mw_products/src/styles.scss"
+            ],
+            "scripts": [
+              "node_modules/jquery/dist/jquery.min.js",
+              "node_modules/bootstrap/dist/js/bootstrap.min.js"
+            ]
+          }
+        }
+      }
     },
     "mw-shared": {
       "projectType": "library",
@@ -435,13 +430,10 @@
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
             "tsConfig": "projects/mw-shared/tsconfig.spec.json",
-            "polyfills": [
-              "zone.js",
-              "zone.js/testing"
-            ]
+            "polyfills": ["zone.js", "zone.js/testing"]
           }
         }
       }
     }
-	}
+  }
 }

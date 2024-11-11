@@ -13,6 +13,7 @@ export * from './lib/global-constants';
 //services
 export * from './lib/mw-shared.service';
 export * from './lib/global-chunk-error-handler.service'
+export * from './lib/auth-interceptor.service'
 
 
 //Directives

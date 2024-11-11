@@ -10,6 +10,10 @@ export class CustomerListComponent {
 
   list:any;
   ngOnInit(){
+
+    // this.list.forEach((ele:any) => {
+    //   console.log(ele)
+    // })
   }
 
 }
