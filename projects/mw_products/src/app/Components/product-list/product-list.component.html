@@ -1,9 +1,10 @@
 <div class="container-fluid">
-    <div class="search-container mt-5">
+    <!-- <div class="search-container mt-5">
         <input type="text" placeholder="Search..." [(ngModel)]="searchValue">
         <i class="fas fa-search search-icon" (click)="searchItems()"></i>
-    </div>
-    <div class="main">
+    </div> -->
+    <pagination *ngIf="productList" [dataList]="productList" [paseSize]="paseSize" [maxRangeSize]="3" (dataListForPage)="getCurrentPageData($event)"></pagination>
+    <div class="main" *ngIf="products">
         <div class="product-detail-card" *ngFor="let product of products">
             <img [src]="product.image" alt="Product Image" class="product-image">
             <div class="product-info">

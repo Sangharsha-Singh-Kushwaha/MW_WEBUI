@@ -1,0 +1,11 @@
+<div class="pagination">
+    <div class="search-container mt-5">
+        <input type="text" placeholder="Search..." [(ngModel)]="searchValue">
+        <i class="fas fa-search search-icon" (click)="searchItems()"></i>
+    </div>
+    <button class="prev" [disabled] ="currentPage==1" (click)="previous()">Previous</button>
+    <ng-container *ngFor="let currentRange of pageRange">
+        <button class="page" [ngClass]="{'highlight' : currentRange == currentPage}" [disabled]="currentRange == currentPage" (click)="onPageChange(currentRange)">{{currentRange}}</button>
+    </ng-container>
+    <button class="next" [disabled] ="currentPage==totalPage" (click)="next()">Next</button>
+</div>
