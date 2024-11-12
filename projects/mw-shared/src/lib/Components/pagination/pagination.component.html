@@ -3,6 +3,11 @@
         <input type="text" placeholder="Search..." [(ngModel)]="searchValue">
         <i class="fas fa-search search-icon" (click)="searchItems()"></i>
     </div>
+    <div>
+        <select name="filter" id="filter" (change)="onCategoryChange($event)" [(ngModel)]="selectedCategory">
+            <option *ngFor="let category of categoryList" [value]="category">{{ category }}</option>
+        </select>
+    </div>
     <button class="prev" [disabled] ="currentPage==1" (click)="previous()">Previous</button>
     <ng-container *ngFor="let currentRange of pageRange">
         <button class="page" [ngClass]="{'highlight' : currentRange == currentPage}" [disabled]="currentRange == currentPage" (click)="onPageChange(currentRange)">{{currentRange}}</button>

@@ -16,10 +16,16 @@ export class PaginationComponent {
   public initialPageRange:any = [];
   public totalPage:number = 1;
   public searchValue: any = "";
-  public searchDataList:any;
+  public searchDataList:any =[];
+  public filterDataList:any = []
+  public categoryList:any = []
+  public selectedCategory:any= "All";
+  public isSearched:boolean=false;
+  public isfiltered:boolean=false;
 
   ngOnInit(){
     this.getInitialPageRange(this.dataList);
+    this.getCategoryList();
   }
 
   // getInitialPageRange(){
@@ -63,7 +69,9 @@ export class PaginationComponent {
   onPageChange(currentPage:number){
     this.currentPage = currentPage;
     this.getPageRange(this.currentPage);
-    let dataForCurrentPage = this.setDataForCurrentPage(this.currentPage, this.searchValue =="" ? this.dataList : this.searchDataList);
+    let changeDataList = this.isSearched ? this.searchDataList : this.isfiltered ? this.filterDataList : this.dataList
+    //let dataForCurrentPage = this.setDataForCurrentPage(this.currentPage, this.searchValue =="" && this.selectedCategory=="All" ? this.dataList : this.searchDataList);
+    let dataForCurrentPage = this.setDataForCurrentPage(this.currentPage,changeDataList);
     this.dataListForPage.emit(dataForCurrentPage);
   }
 
@@ -83,10 +91,38 @@ export class PaginationComponent {
   }
 
   searchItems() {
-    this.searchDataList = this.searchValue && this.searchValue?.trim() !="" ? JSON.parse(JSON.stringify(this.dataList))?.filter( (ele:any) => ele.category?.includes(this.searchValue?.trim())) : this.dataList;
+    this.checkForFilterSearch();
+    let changeDataList = this.isfiltered ? JSON.parse(JSON.stringify(this.filterDataList)) : JSON.parse(JSON.stringify(this.dataList))
+    this.searchDataList = this.searchValue && this.searchValue?.trim() !="" ? JSON.parse(JSON.stringify(changeDataList))?.filter( (ele:any) => ele.title?.toLowerCase()?.includes(this.searchValue?.trim()?.toLowerCase())) : changeDataList;
     this.currentPage = 1;
     this.getInitialPageRange(this.searchDataList );
     this.onPageChange(this.currentPage);
     
+  }
+
+  onCategoryChange(event:any){
+    this.searchValue = ""
+    this.checkForFilterSearch();
+    const selectElement = event.target as HTMLSelectElement;
+    this.selectedCategory = selectElement.value;
+    this.filterDataList = this.selectedCategory !="All" ? JSON.parse(JSON.stringify(this.dataList))?.filter( (ele:any) => ele.category ==  this.selectedCategory) : this.dataList;
+    this.currentPage = 1;
+    this.getInitialPageRange(this.filterDataList);
+    this.onPageChange(this.currentPage);
+
+  }
+
+  getCategoryList(){
+    this.categoryList = this.dataList.reduce((acc: string[], item:any) => {
+      if (!acc.includes(item.category)) {
+        acc.push(item.category);
+      }
+      return acc;
+    }, ["All"]);
+  }
+
+  checkForFilterSearch(){
+    this.isSearched = this.searchValue !="";
+    this.isfiltered = this.selectedCategory !="All";
   }
 }
